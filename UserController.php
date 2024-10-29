@@ -17,7 +17,7 @@ class UserController
     public function showUsers()
     {
         $users = $this->userModel->getAllUsers();
-        include 'views/users.php';
+        include __DIR__ . '/views/users.php';
     }
 }
 
@@ -26,15 +26,14 @@ $dotenv->load();
 
 try {
     $pdo = new PDO(
-        "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}", 
-        $_ENV['DB_USER'], 
+        "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}",
+        $_ENV['DB_USER'],
         $_ENV['DB_PASS']
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $controller = new UserController($pdo);
     $controller->showUsers();
-
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
 }
