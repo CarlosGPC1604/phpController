@@ -11,7 +11,7 @@ class User
 
     public function getAllUsers()
     {
-        $stmt = $this->pdo->prepare("SELECT id, name, email FROM users");
+        $stmt = $this->pdo->prepare("SELECT id, nombre, correo FROM usuarios");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php'; // Asegúrate de que este archivo incluya autoload de Composer
+require 'vendor/autoload.php';
 require 'User.php';
 
 use Dotenv\Dotenv;
@@ -21,11 +21,9 @@ class UserController
     }
 }
 
-// Cargar variables de entorno
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Conexión PDO usando variables de entorno
 try {
     $pdo = new PDO(
         "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}", 
@@ -34,7 +32,6 @@ try {
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Instancia del controlador
     $controller = new UserController($pdo);
     $controller->showUsers();
 
